@@ -6,7 +6,13 @@ export function CardProfile() {
     <div className="bg-dark-bg-secondary p-10 text-dark-text-primary mb-4 rounded-xl">
       <div className="w-full flex mb-[52px]">
         <div>
-          <Image src={avatar} alt="UserPhoto" width={160} height={160} />
+          <Image
+            src={avatar}
+            alt="UserPhoto"
+            width={160}
+            height={160}
+            priority
+          />
         </div>
         <div className="pl-12">
           <div className="text-[46px] flex flex-col">

@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "clsx": "^2.1.1",
+    "country-list-js": "^3.1.8",
     "next": "^14.2.3",
     "react": "^19.0.0-rc-9d4fba0788-20240530",
     "react-dom": "^19.0.0-rc-9d4fba0788-20240530",

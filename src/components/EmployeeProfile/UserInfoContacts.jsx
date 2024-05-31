@@ -1,23 +1,37 @@
+import { useState } from "react";
+import { ModalUserInfoUI } from "../UI/ModalUserInfoUI";
 import { UserInfoInputIU } from "../UI/UserInfoInputIU";
+import { personalContactsArr } from "./constants";
 
 export function UserInfoContacts() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
+      <ModalUserInfoUI
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        fields={personalContactsArr}
+        title="Персональная информация"
+        insetX="inset-x-[12%]"
+        insetY="inset-y-1/4"
+      />
       <div className="flex justify-between">
         <span className="text-dark-text-primary">Контакты</span>
-        <span className="text-dark-text-tertiary cursor-pointer">Изменить</span>
+        <span
+          className="text-dark-text-tertiary cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          Изменить
+        </span>
       </div>
       <form className="pt-8 grid grid-cols-2 gap-6">
-        <UserInfoInputIU
-          labelChildren={"Номер телефона"}
-          inputChildren="+7 (999) 999-99-99"
-        />
-        <UserInfoInputIU
-          labelChildren={"Электронная почта"}
-          inputChildren="test@gmail.com"
-        />
-        <UserInfoInputIU labelChildren={"Telegram"} inputChildren="@tg" />
-        <UserInfoInputIU labelChildren={"Slack"} inputChildren="@slack" />
+        {personalContactsArr.map((field, index) => (
+          <UserInfoInputIU
+            key={index}
+            labelChildren={field.label}
+            inputChildren={field.value}
+          />
+        ))}
       </form>
     </div>
   );
