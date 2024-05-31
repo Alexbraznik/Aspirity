@@ -13,7 +13,7 @@ export function Header() {
         <ButtonUI children={"Создать счет"} />
         <ButtonUI children={"Корзина"} />
         <div className="border border-[#363738]  rounded-full flex items-center py-1.5 px-4 gap-x-1">
-          <Image src={avatar} alt="avatar" width={24} height={24} priority />
+          <Image src={avatar} alt="avatar" width={24} height={24} />
           <UnionDown />
         </div>
         <UnionBurger />
