@@ -7,7 +7,7 @@ import { UnionBurger } from "./img/header/UnionBurger";
 
 export function Header() {
   return (
-    <div className="w-full flex justify-between items-center px-4 py-2">
+    <div className="w-full flex justify-between items-center px-4 py-6">
       <LogoAspirity className="w-[180px] h-[40px]" />
       <div className="flex gap-x-2 items-center">
         <ButtonUI children={"Создать счет"} />

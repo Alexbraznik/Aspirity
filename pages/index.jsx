@@ -2,7 +2,7 @@ import { EmployeeProfile } from "../src/components/EmployeeProfile/EmployeeProfi
 
 export default function HomePage() {
   return (
-    <div className="w-screen h-screen">
+    <div>
       <EmployeeProfile />
     </div>
   );
