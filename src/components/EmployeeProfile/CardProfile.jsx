@@ -7,13 +7,7 @@ export function CardProfile() {
       <div className="w-full flex flex-col sm:flex-row items-center mb-[52px] se:py-0 pt-8">
         <div className="sm:flex items-center mr-12 se:ml-0 ml-[55px] se:py-0 pb-4">
           <div className="w-[160px] h-[160px] se:ml-0 ml-[20px] mb-4 se:-mr-0 ">
-            <Image
-              src={avatar}
-              alt="avatar"
-              layout="responsive"
-              width={160}
-              height={160}
-            />
+            <Image src={avatar} alt="avatar" width={160} height={160} />
           </div>
           <div className="flex flex-col se:pl-12 pl-0 -mb-24">
             <div className="text-2xl se:block se:flex-col text-dark-text-primary se:leading-[56px] se:items-start items-center flex flex-col se:text-[46px] mb-8 font-bold">
