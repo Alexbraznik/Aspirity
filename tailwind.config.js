@@ -19,6 +19,13 @@ module.exports = {
         "dark-border-primary": "#424242",
         "dark-text-tertiary": "#76787A",
       },
+      screens: {
+        tablet: "700px",
+        se: "360px",
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
     },
   },
   plugins: [],

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ModalUserInfoUI } from "../UI/ModalUserInfoUI";
-import { UserInfoInputIU } from "../UI/UserInfoInputIU";
+import { UserInfoInputUI } from "../UI/UserInfoInputUI";
 import { personalContactsArr } from "./constants";
 
 export function UserInfoContacts() {
@@ -16,9 +16,11 @@ export function UserInfoContacts() {
         insetY="inset-y-1/4"
       />
       <div className="flex justify-between">
-        <span className="text-dark-text-primary">Контакты</span>
+        <span className="text-dark-text-primary se:text-2xl font-medium leading-8">
+          Контакты
+        </span>
         <span
-          className="text-dark-text-tertiary cursor-pointer"
+          className="text-dark-text-tertiary cursor-pointer font-medium text-sm"
           onClick={() => setIsOpen(!isOpen)}
         >
           Изменить
@@ -26,7 +28,7 @@ export function UserInfoContacts() {
       </div>
       <form className="pt-8 grid grid-cols-2 gap-6">
         {personalContactsArr.map((field, index) => (
-          <UserInfoInputIU
+          <UserInfoInputUI
             key={index}
             labelChildren={field.label}
             inputChildren={field.value}

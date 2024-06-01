@@ -1,6 +1,7 @@
-export function UnionBurger() {
+export function UnionBurger({ className }) {
   return (
     <svg
+      className={className}
       width="18"
       height="12"
       viewBox="0 0 18 12"

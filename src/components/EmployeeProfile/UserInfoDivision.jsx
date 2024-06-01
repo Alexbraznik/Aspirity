@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { UserInfoInputIU } from "../UI/UserInfoInputIU";
+import { UserInfoInputUI } from "../UI/UserInfoInputUI";
 import { personalDivisionArr } from "./constants";
-import { ModalUserInfoUI } from "../UI/ModalUserInfoUI";
+import { ModalUserDivisionUI } from "../UI/ModalUserDivisionUI";
 
 export function UserInfoDivision() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="mb-10">
-      <ModalUserInfoUI
+      <ModalUserDivisionUI
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         fields={personalDivisionArr}
@@ -17,9 +17,11 @@ export function UserInfoDivision() {
         insetY="inset-y-1/4"
       />
       <div className="flex justify-between">
-        <span className="text-dark-text-primary">Подразделение</span>
+        <span className="text-dark-text-primary se:text-2xl font-medium leading-8">
+          Подразделение
+        </span>
         <span
-          className="text-dark-text-tertiary cursor-pointer"
+          className="text-dark-text-tertiary cursor-pointer font-medium text-sm"
           onClick={() => setIsOpen(!isOpen)}
         >
           Изменить
@@ -27,7 +29,7 @@ export function UserInfoDivision() {
       </div>
       <form className="pt-8 grid grid-cols-2 gap-6">
         {personalDivisionArr.map((field, index) => (
-          <UserInfoInputIU
+          <UserInfoInputUI
             key={index}
             labelChildren={field.label}
             inputChildren={field.value}

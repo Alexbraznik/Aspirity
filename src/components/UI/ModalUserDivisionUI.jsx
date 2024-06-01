@@ -1,13 +1,13 @@
+import clsx from "clsx";
 import { ButtonUI } from "./ButtonUI";
 
-export function ModalUserInfoUI({
+export function ModalUserDivisionUI({
   isOpen,
   setIsOpen,
   fields,
   title,
   insetX,
   insetY,
-  countries,
 }) {
   function closeModal(event) {
     if (event.target.classList.contains("modal")) {
@@ -24,7 +24,7 @@ export function ModalUserInfoUI({
         <div className={`modal w-full md:w-3/4 se:fixed ${insetX} ${insetY}`}>
           <div className="bg-dark-bg-secondary p-8 rounded-lg">
             <div className="text-4xl flex justify-between items-center">
-              <span className="text-dark-text-primary text-8xl">{title}</span>
+              <span className="text-dark-text-primary">{title}</span>
               <span
                 className="text-5xl text-dark-text-secondary cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
@@ -35,7 +35,9 @@ export function ModalUserInfoUI({
             <form className="pt-8 grid gap-6 sm:grid-cols-2">
               {fields.map((field, index) => (
                 <div
-                  className={`text-dark-text-secondary relative `}
+                  className={`text-dark-text-secondary relative ${
+                    field.colSpan || "col-span-1"
+                  }`}
                   key={index}
                 >
                   <span className="absolute -top-2 left-2 bg-dark-bg-secondary text-xs">
@@ -43,9 +45,9 @@ export function ModalUserInfoUI({
                   </span>
                   {field.isSelect ? (
                     <select className="bg-dark-bg-secondary border border-dark-border-primary text-sm w-full rounded px-3.5 py-2">
-                      {countries.map((el, index) => (
-                        <option key={index} value={el.value}>
-                          {el.value}
+                      {field.options.map((option, index) => (
+                        <option key={index} value={option}>
+                          {option}
                         </option>
                       ))}
                     </select>

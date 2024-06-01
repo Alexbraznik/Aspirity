@@ -10,13 +10,13 @@ export function Header() {
     <div className="w-full flex justify-between items-center px-4 py-6">
       <LogoAspirity className="w-[180px] h-[40px]" />
       <div className="flex gap-x-2 items-center">
-        <ButtonUI children={"Создать счет"} />
-        <ButtonUI children={"Корзина"} />
+        <ButtonUI className="hidden sm:block" children={"Создать счет"} />
+        <ButtonUI className="hidden sm:block" children={"Корзина"} />
         <div className="border border-[#363738]  rounded-full flex items-center py-1.5 px-4 gap-x-1">
           <Image src={avatar} alt="avatar" width={24} height={24} />
           <UnionDown />
         </div>
-        <UnionBurger />
+        <UnionBurger className="ml-2" />
       </div>
     </div>
   );

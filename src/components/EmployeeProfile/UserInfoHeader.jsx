@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { UserInfoInputIU } from "../UI/UserInfoInputIU";
+import { UserInfoInputUI } from "../UI/UserInfoInputUI";
 import { ModalUserInfoUI } from "../UI/ModalUserInfoUI";
+import { personalInfoArr } from "./constants";
 
 export function UserInfoHeader() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
@@ -35,9 +36,11 @@ export function UserInfoHeader() {
         countries={countries}
       />
       <div className="flex justify-between">
-        <span className="text-dark-text-primary">Персональная информация</span>
+        <span className="text-dark-text-primary se:text-2xl font-medium leading-8">
+          Персональная информация
+        </span>
         <span
-          className="text-dark-text-tertiary cursor-pointer"
+          className="text-dark-text-tertiary cursor-pointer font-medium text-sm"
           onClick={() => setIsOpen(!isOpen)}
         >
           Изменить
@@ -45,7 +48,7 @@ export function UserInfoHeader() {
       </div>
       <form className="pt-8 grid grid-cols-2 gap-6">
         {personalInfoArr.map((field, index) => (
-          <UserInfoInputIU
+          <UserInfoInputUI
             key={index}
             labelChildren={field.label}
             inputChildren={field.value}
@@ -56,20 +59,3 @@ export function UserInfoHeader() {
     </div>
   );
 }
-
-const personalInfoArr = [
-  { label: "Имя", value: "Юрий" },
-  { label: "Фамилия", value: "Герыш" },
-  { label: "Отчество", value: "Андреевич", colSpan: "col-span-2" },
-  { label: "Дата рождения", value: "06.01.2014" },
-  { label: "Дата трудоустройства", value: "15.05.2020" },
-  { label: "Страна", value: "Россия", isSelect: true },
-  { label: "Город", value: "Красноярск", isSelect: true },
-  { label: "Зарплата", value: "100 000 ₽" },
-  { label: "Еженедельная зарплата", value: "23 000 ₽" },
-  {
-    label: "Номер счета",
-    value: "12345678912345678912",
-    colSpan: "col-span-2",
-  },
-];
