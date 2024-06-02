@@ -8,7 +8,7 @@ export function UserInfoInputUI({
       <span className="absolute -top-2 left-2 bg-dark-bg-secondary text-xs leading-4">
         {labelChildren}
       </span>
-      <p className="bg-dark-bg-secondary border border-dark-border-primary text-sm w-full leading-6 font-medium rounded px-3.5 py-2">
+      <p className="bg-dark-bg-secondary border border-dark-border-primary text-sm w-full leading-6 font-medium rounded px-3.5 py-2 truncate">
         {inputChildren}
       </p>
     </div>
