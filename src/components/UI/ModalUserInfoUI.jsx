@@ -96,7 +96,7 @@ export function ModalUserInfoUI({
                           field.type === "string"
                             ? /^[a-zA-Zа-яА-Я]*$/
                             : field.type === "number"
-                            ? /^[A-Za-z0-9\s₽.]+$/i
+                            ? /^[\d\s₽.]+$/i
                             : null,
                       })}
                     ></input>
