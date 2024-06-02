@@ -6,6 +6,7 @@ import { personalInfoArr } from "./constants";
 export function UserInfoHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const [countries, setCountries] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
     async function fetchCounties() {
@@ -24,6 +25,10 @@ export function UserInfoHeader() {
     fetchCounties();
   }, []);
 
+  const userInfoUpdate = (data) => {
+    setUserInfo(data);
+  };
+
   return (
     <div className="mb-10">
       <ModalUserInfoUI
@@ -31,9 +36,9 @@ export function UserInfoHeader() {
         setIsOpen={setIsOpen}
         fields={personalInfoArr}
         title="Персональная информация"
-        insetX="inset-x-[12%]"
-        insetY="inset-y-[15%]"
         countries={countries}
+        userInfoUpdate={userInfoUpdate}
+        isPersonalInfo={true}
       />
       <div className="flex justify-between">
         <span className="text-dark-text-primary se:text-2xl font-medium leading-8">
@@ -51,7 +56,7 @@ export function UserInfoHeader() {
           <UserInfoInputUI
             key={index}
             labelChildren={field.label}
-            inputChildren={field.value}
+            inputChildren={userInfo[field.name] || field.value}
             colSpan={field.colSpan}
           />
         ))}

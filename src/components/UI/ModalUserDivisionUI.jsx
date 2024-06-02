@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { useForm } from "react-hook-form";
 import { ButtonUI } from "./ButtonUI";
 
 export function ModalUserDivisionUI({
@@ -8,17 +8,34 @@ export function ModalUserDivisionUI({
   title,
   insetX,
   insetY,
+  userInfoUpdate,
 }) {
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm({ mode: "onBlur" });
+
+  const onSubmit = (data) => {
+    userInfoUpdate(data);
+    setIsOpen(false);
+  };
+
   function closeModal(event) {
     if (event.target.classList.contains("modal")) {
       setIsOpen(false);
     }
   }
 
+  const getErrorMessage = (fieldType, required) => {
+    if (required) return "Поле обязательно!";
+    return fieldType === "string" ? "Введите буквы!" : "Введите цифры!";
+  };
+
   return (
     isOpen && (
       <div
-        className="modal bg-black/90 fixed inset-0 z-10 overflow-auto"
+        className="modal bg-black/90 fixed inset-0 z-10 flex justify-center items-center overflow-auto"
         onClick={closeModal}
       >
         <div className={`modal w-full md:w-3/4 se:fixed ${insetX} ${insetY}`}>
@@ -32,7 +49,10 @@ export function ModalUserDivisionUI({
                 &times;
               </span>
             </div>
-            <form className="pt-8 grid gap-6 sm:grid-cols-2">
+            <form
+              className="pt-8 grid gap-6 sm:grid-cols-2"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               {fields.map((field, index) => (
                 <div
                   className={`text-dark-text-secondary relative ${
@@ -52,16 +72,43 @@ export function ModalUserDivisionUI({
                       ))}
                     </select>
                   ) : (
-                    <p className="bg-dark-bg-secondary border border-dark-border-primary text-sm w-full rounded px-3.5 py-2">
-                      {field.value}
-                    </p>
+                    <input
+                      className="bg-dark-bg-secondary border border-dark-border-primary text-sm w-full rounded px-3.5 py-2"
+                      defaultValue={field.value}
+                      {...register(field.name, {
+                        required: true,
+                        pattern:
+                          field.type === "string"
+                            ? /^[a-zA-Zа-яА-Я]*$/
+                            : field.type === "number"
+                            ? /^[A-Za-z0-9\s₽.]+$/i
+                            : null,
+                      })}
+                    ></input>
                   )}
+                  <div>
+                    {errors?.[field.name] && (
+                      <p className="text-xs color: text-red-600">
+                        {getErrorMessage(
+                          field.type,
+                          errors[field.name]?.type === "required"
+                        )}
+                      </p>
+                    )}
+                  </div>
                 </div>
               ))}
+              <div className="pt-10 col-span-2">
+                <ButtonUI
+                  className="w-full"
+                  type="submit"
+                  onClick={() => setIsOpen(false)}
+                  disabled={!isValid}
+                >
+                  Сохранить
+                </ButtonUI>
+              </div>
             </form>
-            <div className="flex justify-center mt-4 pt-10">
-              <ButtonUI onClick={() => setIsOpen(false)}>Сохранить</ButtonUI>
-            </div>
           </div>
         </div>
       </div>

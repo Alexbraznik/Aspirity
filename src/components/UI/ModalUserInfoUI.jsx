@@ -1,4 +1,6 @@
+import clsx from "clsx";
 import { ButtonUI } from "./ButtonUI";
+import { useForm } from "react-hook-form";
 
 export function ModalUserInfoUI({
   isOpen,
@@ -8,17 +10,35 @@ export function ModalUserInfoUI({
   insetX,
   insetY,
   countries,
+  userInfoUpdate,
+  isPersonalInfo,
 }) {
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm({ mode: "onBlur" });
+
+  const onSubmit = (data) => {
+    userInfoUpdate(data);
+    setIsOpen(false);
+  };
+
   function closeModal(event) {
     if (event.target.classList.contains("modal")) {
       setIsOpen(false);
     }
   }
 
+  const getErrorMessage = (fieldType, required) => {
+    if (required) return "Поле обязательно!";
+    return fieldType === "string" ? "Введите буквы!" : "Введите цифры!";
+  };
+
   return (
     isOpen && (
       <div
-        className="modal bg-black/90 fixed inset-0 z-10 overflow-auto"
+        className="modal bg-black/90 fixed inset-0 z-10 flex justify-center items-center overflow-auto"
         onClick={closeModal}
       >
         <div className={`modal w-full md:w-3/4 se:fixed ${insetX} ${insetY}`}>
@@ -32,35 +52,70 @@ export function ModalUserInfoUI({
                 &times;
               </span>
             </div>
-            <form className="pt-8 grid gap-6 sm:grid-cols-2">
+            <form
+              className="pt-8 grid gap-6 sm:grid-cols-2"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               {fields.map((field, index) => (
                 <div
-                  className={`text-dark-text-secondary relative `}
+                  className={clsx("text-dark-text-secondary relative", {
+                    "sm:col-span-2":
+                      isPersonalInfo && (index === 2 || index === 9),
+                  })}
                   key={index}
                 >
                   <span className="absolute -top-2 left-2 bg-dark-bg-secondary text-xs">
                     {field.label}
                   </span>
                   {field.isSelect ? (
-                    <select className="bg-dark-bg-secondary border border-dark-border-primary text-sm w-full rounded px-3.5 py-2">
-                      {countries.length > 0 &&
-                        countries.map((el, index) => (
-                          <option key={index} value={el.value}>
-                            {el.value}
-                          </option>
-                        ))}
+                    <select
+                      className="bg-dark-bg-secondary border border-dark-border-primary text-sm w-full rounded px-3.5 py-2"
+                      {...register(field.name)}
+                    >
+                      {countries.map((el, index) => (
+                        <option key={index} value={el.value}>
+                          {el.value}
+                        </option>
+                      ))}
                     </select>
                   ) : (
-                    <p className="bg-dark-bg-secondary border border-dark-border-primary text-sm w-full rounded px-3.5 py-2">
-                      {field.value}
-                    </p>
+                    <input
+                      className="bg-dark-bg-secondary border border-dark-border-primary text-sm w-full rounded px-3.5 py-2"
+                      defaultValue={field.value}
+                      {...register(field.name, {
+                        required: true,
+                        pattern:
+                          field.type === "string"
+                            ? /^[a-zA-Zа-яА-Я]*$/
+                            : field.type === "number"
+                            ? /^[A-Za-z0-9\s₽.]+$/i
+                            : null,
+                      })}
+                    ></input>
                   )}
+                  <div>
+                    {errors?.[field.name] && (
+                      <p className="text-xs color: text-red-600">
+                        {getErrorMessage(
+                          field.type,
+                          errors[field.name]?.type === "required"
+                        )}
+                      </p>
+                    )}
+                  </div>
                 </div>
               ))}
+              <div className="pt-10 col-span-2">
+                <ButtonUI
+                  className="w-full"
+                  type="submit"
+                  onClick={() => setIsOpen(false)}
+                  disabled={!isValid}
+                >
+                  Сохранить
+                </ButtonUI>
+              </div>
             </form>
-            <div className="flex justify-center mt-4 pt-10">
-              <ButtonUI onClick={() => setIsOpen(false)}>Сохранить</ButtonUI>
-            </div>
           </div>
         </div>
       </div>

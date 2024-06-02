@@ -19,7 +19,7 @@ export function ProjectInfo() {
           <div className="se:py-10 pt-8 pb-4">
             <div className="se:flex gap-x-[80px] xl:gap-x-24">
               <div className="se:flex se:flex-col se:w-[24%]">
-                <span className="text-dark-text-tertiary leading-6">
+                <span className="text-dark-text-tertiary leading-6 md:whitespace-nowrap">
                   Название проекта
                 </span>
                 <br className="se:hidden block" />

@@ -5,6 +5,11 @@ import { ModalUserDivisionUI } from "../UI/ModalUserDivisionUI";
 
 export function UserInfoDivision() {
   const [isOpen, setIsOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+
+  const userInfoUpdate = (data) => {
+    setUserInfo(data);
+  };
 
   return (
     <div className="mb-10">
@@ -13,8 +18,7 @@ export function UserInfoDivision() {
         setIsOpen={setIsOpen}
         fields={personalDivisionArr}
         title="Персональная информация"
-        insetX="inset-x-[12%]"
-        insetY="inset-y-1/4"
+        userInfoUpdate={userInfoUpdate}
       />
       <div className="flex justify-between">
         <span className="text-dark-text-primary se:text-2xl font-medium leading-8">
@@ -32,7 +36,7 @@ export function UserInfoDivision() {
           <UserInfoInputUI
             key={index}
             labelChildren={field.label}
-            inputChildren={field.value}
+            inputChildren={userInfo[field.name] || field.value}
           />
         ))}
       </form>
