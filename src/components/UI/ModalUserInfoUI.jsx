@@ -24,7 +24,7 @@ export function ModalUserInfoUI({
         <div className={`modal w-full md:w-3/4 se:fixed ${insetX} ${insetY}`}>
           <div className="bg-dark-bg-secondary p-8 rounded-lg">
             <div className="text-4xl flex justify-between items-center">
-              <span className="text-dark-text-primary text-8xl">{title}</span>
+              <span className="text-dark-text-primary text-4xl">{title}</span>
               <span
                 className="text-5xl text-dark-text-secondary cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}

@@ -32,7 +32,7 @@ export function UserInfoHeader() {
         fields={personalInfoArr}
         title="Персональная информация"
         insetX="inset-x-[12%]"
-        insetY="inset-y-1/4"
+        insetY="inset-y-[15%]"
         countries={countries}
       />
       <div className="flex justify-between">
