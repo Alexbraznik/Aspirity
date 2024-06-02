@@ -12,9 +12,7 @@ export function ModalUserInfoUI({
   countries,
   userInfoUpdate,
   isPersonalInfo,
-  personalDivisionOptions,
 }) {
-  console.log(personalDivisionOptions, "personalDivisionOptions");
   const {
     register,
     formState: { errors, isValid },

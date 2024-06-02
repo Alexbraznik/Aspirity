@@ -19,11 +19,6 @@ export function UserInfoDivision() {
         fields={personalDivisionArr}
         title="Персональная информация"
         userInfoUpdate={userInfoUpdate}
-        personalDivisionOptions={
-          personalDivisionArr.find(
-            (field) => field.category === "personalDivision"
-          ).options
-        }
       />
       <div className="flex justify-between">
         <span className="text-dark-text-primary se:text-2xl font-medium leading-8">
