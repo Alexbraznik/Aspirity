@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { UserInfoInputUI } from "../UI/UserInfoInputUI";
 import { personalDivisionArr } from "./constants";
-import { ModalUserDivisionUI } from "../UI/ModalUserDivisionUI";
+import { ModalUserInfoUI } from "../UI/ModalUserInfoUI";
 
 export function UserInfoDivision() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,12 +13,17 @@ export function UserInfoDivision() {
 
   return (
     <div className="mb-10">
-      <ModalUserDivisionUI
+      <ModalUserInfoUI
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         fields={personalDivisionArr}
         title="Персональная информация"
         userInfoUpdate={userInfoUpdate}
+        personalDivisionOptions={
+          personalDivisionArr.find(
+            (field) => field.category === "personalDivision"
+          ).options
+        }
       />
       <div className="flex justify-between">
         <span className="text-dark-text-primary se:text-2xl font-medium leading-8">

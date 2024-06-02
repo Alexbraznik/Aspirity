@@ -12,7 +12,9 @@ export function ModalUserInfoUI({
   countries,
   userInfoUpdate,
   isPersonalInfo,
+  personalDivisionOptions,
 }) {
+  console.log(personalDivisionOptions, "personalDivisionOptions");
   const {
     register,
     formState: { errors, isValid },
@@ -67,16 +69,24 @@ export function ModalUserInfoUI({
                   <span className="absolute -top-2 left-2 bg-dark-bg-secondary text-xs">
                     {field.label}
                   </span>
+
                   {field.isSelect ? (
                     <select
                       className="bg-dark-bg-secondary border border-dark-border-primary text-sm w-full rounded px-3.5 py-2"
                       {...register(field.name)}
                     >
-                      {countries.map((el, index) => (
-                        <option key={index} value={el.value}>
-                          {el.value}
-                        </option>
-                      ))}
+                      {field.category === "personalDivision" && field.options
+                        ? field.options.map((option, index) => (
+                            <option key={index} value={option}>
+                              {option}
+                            </option>
+                          ))
+                        : countries &&
+                          countries.map((el, index) => (
+                            <option key={index} value={el.value}>
+                              {el.value}
+                            </option>
+                          ))}
                     </select>
                   ) : (
                     <input

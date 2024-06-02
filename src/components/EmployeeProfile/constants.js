@@ -45,12 +45,14 @@ export const personalDivisionArr = [
     isSelect: true,
     options: ["Дизайн", "Художественный", "Разработка"],
     name: "department",
+    category: "personalDivision",
   },
   {
     label: "Руководитель",
     value: "Анна Кузнецова",
     name: "supervisor",
     type: "any",
+    category: "personalDivision",
   },
   {
     label: "Уровень",
@@ -58,6 +60,7 @@ export const personalDivisionArr = [
     isSelect: true,
     options: ["Junior", "Middle", "Senior"],
     name: "level",
+    category: "personalDivision",
   },
   {
     label: "Должность",
@@ -65,6 +68,7 @@ export const personalDivisionArr = [
     isSelect: true,
     options: ["UI/UX designer", "Ещё должность", "Третья должность"],
     name: "position",
+    category: "personalDivision",
   },
 ];
 
