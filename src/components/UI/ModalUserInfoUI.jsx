@@ -10,8 +10,10 @@ export function ModalUserInfoUI({
   insetX,
   insetY,
   countries,
+  cities,
   userInfoUpdate,
   isPersonalInfo,
+  setSelectedCountry,
 }) {
   const {
     register,
@@ -22,6 +24,10 @@ export function ModalUserInfoUI({
   const onSubmit = (data) => {
     userInfoUpdate(data);
     setIsOpen(false);
+  };
+
+  const handleCountryChange = (event) => {
+    setSelectedCountry(event.target.value);
   };
 
   function closeModal(event) {
@@ -72,17 +78,26 @@ export function ModalUserInfoUI({
                     <select
                       className="bg-dark-bg-secondary border border-dark-border-primary text-sm w-full rounded px-3.5 py-2"
                       {...register(field.name)}
+                      onChange={
+                        field.name === "country" ? handleCountryChange : null
+                      }
                     >
-                      {field.category === "personalDivision" && field.options
-                        ? field.options.map((option, index) => (
-                            <option key={index} value={option}>
-                              {option}
-                            </option>
-                          ))
-                        : countries &&
-                          countries.map((el, index) => (
+                      {field.name === "country"
+                        ? countries.map((el, index) => (
                             <option key={index} value={el.value}>
                               {el.value}
+                            </option>
+                          ))
+                        : field.name === "city"
+                        ? cities.map((city, index) => (
+                            <option key={index} value={city}>
+                              {city}             
+                            </option>
+                          ))
+                        : field.options &&
+                          field.options.map((option, index) => (
+                            <option key={index} value={option}>
+                              {option}           
                             </option>
                           ))}
                     </select>

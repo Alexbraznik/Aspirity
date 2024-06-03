@@ -6,16 +6,21 @@ import { personalInfoArr } from "./constants";
 export function UserInfoHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [cities, setCities] = useState([]);
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
     async function fetchCounties() {
       try {
-        const response = await fetch("https://restcountries.com/v3.1/all");
+        const response = await fetch(
+          "https://countriesnow.space/api/v0.1/countries"
+        );
         const data = await response.json();
 
-        const formattedCountries = data.map((country) => ({
-          value: country.name.common,
+        const formattedCountries = data.data.map((country) => ({
+          value: country.country,
+          cities: country.cities,
         }));
         setCountries(formattedCountries);
       } catch (error) {
@@ -24,6 +29,11 @@ export function UserInfoHeader() {
     }
     fetchCounties();
   }, []);
+
+  useEffect(() => {
+    const country = countries.find((c) => c.value === selectedCountry);
+    setCities(country ? country.cities : []);
+  }, [selectedCountry, countries]);
 
   const userInfoUpdate = (data) => {
     setUserInfo(data);
@@ -37,8 +47,10 @@ export function UserInfoHeader() {
         fields={personalInfoArr}
         title="Персональная информация"
         countries={countries}
+        cities={cities}
         userInfoUpdate={userInfoUpdate}
         isPersonalInfo={true}
+        setSelectedCountry={setSelectedCountry}
       />
       <div className="flex justify-between">
         <span className="text-dark-text-primary se:text-2xl font-medium leading-8">
