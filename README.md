@@ -4,7 +4,7 @@
 
 ## Ссылка на рабочую версию
 
-https://aspirity-ymaz.vercel.app/
+https://aspirity-47hp.vercel.app/
 
 ## Установка
 
